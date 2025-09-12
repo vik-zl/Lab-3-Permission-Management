@@ -41,16 +41,27 @@ namespace Lab_3_Permission_Management
             permissions = newPermissions;
         }
 
-        // Extra: Add or Remove a single permission
+        //  Add a single permission
         public void AddPermission(Permissions permission)
         {
             // complete code to add a permission
         }
-
+        //  Remove a single permission
         public void RemovePermission(Permissions permission)
         {
             //complete code to remove a permission
 
+        }
+        //  Add multiple permisions
+        public void multiplyPermission(Permissions permission1,Permissions permission2)
+        {
+            //complete code to multiply permissions
+
+        }
+        //  remove multiple permisions
+        public void removeMultiplyPermission(Permissions permission1, Permissions permission2)
+        {
+            //complete code to remove multiple permissions
         }
 
         public bool HasPermission(Permissions permission)
