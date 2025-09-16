@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab_3_Permission_Management
 {
@@ -10,31 +6,55 @@ namespace Lab_3_Permission_Management
     {
         static void Main(string[] args)
         {
-            // Add 4 users with none permissions (Admin, operator, manager,senior)
+            // Add 4 users with none permissions (Admin, Operator, Manager, Senior)
             User operatorUser = new User("operator");
-            User SeniorUser = new User("senior");
+            User seniorUser = new User("senior");
             User managerUser = new User("manager");
             User adminUser = new User("admin");
-            /**
-             * 
-             * Add read permission to operatorUser look at line 25 to line 31
-             * Add read, write, execute permissions to manager
-             * Add read, write permissions to senior
-             * Add full permission(read,write,execution) to admin
-             */
+
+            // Add read permission to operator
             operatorUser.AddPermission(Permissions.Read);
-            if(operatorUser.HasPermission(Permissions.Read))
+            if (operatorUser.HasPermission(Permissions.Read))
                 Console.WriteLine("Operator has read permission");
             else
                 Console.WriteLine("Operator does not have read permission");
 
-            /**
-             * Look at tasks description in lab3.1 and complete the remaining tasks
-             */
-            
-            
+            // Add read, write, execute permissions to manager
+            managerUser.AddMultiplePermissions(Permissions.Read, Permissions.Write);
+            managerUser.AddPermission(Permissions.Execute);
 
+            // Add read, write permissions to senior
+            seniorUser.AddMultiplePermissions(Permissions.Read, Permissions.Write);
 
+            // Add full permissions (read, write, execute) to admin
+            adminUser.AddMultiplePermissions(Permissions.Read, Permissions.Write);
+            adminUser.AddPermission(Permissions.Execute);
+
+            // Remove Write permission from Senior
+            seniorUser.RemovePermission(Permissions.Write);
+
+            Console.WriteLine("\n--- Permission Checks ---");
+
+            // Check if Senior has Write permission
+            if (seniorUser.HasPermission(Permissions.Write))
+                Console.WriteLine("Senior has Write permission");
+            else
+                Console.WriteLine("Senior does NOT have Write permission");
+
+            // Check if Manager has Execute permission
+            if (managerUser.HasPermission(Permissions.Execute))
+                Console.WriteLine("Manager has Execute permission");
+            else
+                Console.WriteLine("Manager does NOT have Execute permission");
+
+            // Check if Admin has full permissions (Read + Write + Execute)
+            Permissions full = Permissions.Read | Permissions.Write | Permissions.Execute;
+            if (adminUser.HasPermission(full))
+                Console.WriteLine("Admin has FULL permissions");
+            else
+                Console.WriteLine("Admin does NOT have full permissions");
+
+            Console.ReadLine(); // Keep console open
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Lab_3_Permission_Management
 {
@@ -12,7 +7,6 @@ namespace Lab_3_Permission_Management
         private Permissions permissions;
         private string name;
 
- 
         public User(string name, Permissions initialPermissions = Permissions.None)
         {
             this.name = name;
@@ -20,50 +14,38 @@ namespace Lab_3_Permission_Management
         }
 
         // Getter and Setter for Name
-        public string GetName()
-        {
-            return name;
-        }
-
-        public void SetName(string newName)
-        {
-            name = newName;
-        }
+        public string GetName() => name;
+        public void SetName(string newName) => name = newName;
 
         // Getter and Setter for Permissions
-        public Permissions GetPermissions()
-        {
-            return permissions;
-        }
+        public Permissions GetPermissions() => permissions;
+        public void SetPermissions(Permissions newPermissions) => permissions = newPermissions;
 
-        public void SetPermissions(Permissions newPermissions)
-        {
-            permissions = newPermissions;
-        }
-
-        //  Add a single permission
+        // Add a single permission
         public void AddPermission(Permissions permission)
         {
-            // complete code to add a permission
+            permissions |= permission; // Bitwise OR adds permission
         }
-        //  Remove a single permission
+
+        // Remove a single permission
         public void RemovePermission(Permissions permission)
         {
-            //complete code to remove a permission
-
+            permissions &= ~permission; // Bitwise AND with NOT removes permission
         }
-        //  Add multiple permisions
-        public void multiplyPermission(Permissions permission1,Permissions permission2)
+
+        // Add multiple permissions
+        public void AddMultiplePermissions(Permissions permission1, Permissions permission2)
         {
-            //complete code to multiply permissions
-
+            permissions |= (permission1 | permission2); // Add both
         }
-        //  remove multiple permisions
-        public void removeMultiplyPermission(Permissions permission1, Permissions permission2)
+
+        // Remove multiple permissions
+        public void RemoveMultiplePermissions(Permissions permission1, Permissions permission2)
         {
-            //complete code to remove multiple permissions
+            permissions &= ~(permission1 | permission2); // Remove both
         }
 
+        // Check if user has a specific permission
         public bool HasPermission(Permissions permission)
         {
             return (permissions & permission) == permission;
